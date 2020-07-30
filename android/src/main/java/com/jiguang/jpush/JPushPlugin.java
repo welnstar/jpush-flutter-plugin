@@ -390,11 +390,11 @@ public class JPushPlugin implements MethodCallHandler {
             if (launch != null) {
                 launch.addCategory(Intent.CATEGORY_LAUNCHER);
                 launch.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                launch.putExtra(JPushInterface.EXTRA_NOTIFICATION_TITLE,title);
-                launch.putExtra(JPushInterface.EXTRA_ALERT,alert);
-                for (String key:extras.keySet()) {
-                    launch.putExtra(key,extras.get(key).toString());
+                if(extras.containsKey("cn.jpush.android.EXTRA")){
+                     launch.putExtra("cn.jpush.android.EXTRA",extras.get("cn.jpush.android.EXTRA").toString());
+                     launch.putExtra("route","push?data="+extras.get("cn.jpush.android.EXTRA").toString());
                 }
+           
                 context.startActivity(launch);
             }
         }
