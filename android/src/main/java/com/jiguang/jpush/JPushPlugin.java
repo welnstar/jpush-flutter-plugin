@@ -390,6 +390,11 @@ public class JPushPlugin implements MethodCallHandler {
             if (launch != null) {
                 launch.addCategory(Intent.CATEGORY_LAUNCHER);
                 launch.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                launch.putExtra(JPushInterface.EXTRA_NOTIFICATION_TITLE,title);
+                launch.putExtra(JPushInterface.EXTRA_ALERT,alert);
+                for (String key:extras.keySet()) {
+                    launch.putExtra(key,extras.get(key).toString());
+                }
                 context.startActivity(launch);
             }
         }
